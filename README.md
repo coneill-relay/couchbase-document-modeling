@@ -1,5 +1,15 @@
 # Couchbase tests
 
+## Getting started
+
+```bash
+docker-compose up -d
+npm i
+
+# to run
+npm run start -- src/<file>
+```
+
 ## indexes
 
 ## Results
@@ -26,4 +36,6 @@ Storing a subdocument of submission ids
 }
 ```
 
-Seems to break down around 300k to 400k items. Couchbase does not like unbounded arrays =(
+Seems to break down around 300k to 400k items. Couchbase does not like unbounded arrays.
+
+Storing the submission data as a seperate document and keeping a reference to the original form seems to be the best way to handle it.

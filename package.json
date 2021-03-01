@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node app.ts",
+    "start": "ts-node -T",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/faker": "^5.1.7",
+    "@types/node": "^14.14.31",
     "@types/uuid": "^8.3.0",
     "couchbase": "^3.1.1",
     "cuid": "^2.1.8",

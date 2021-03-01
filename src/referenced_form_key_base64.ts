@@ -1,9 +1,10 @@
+import { Buffer } from 'buffer';
 import faker from 'faker';
-import { v4 } from 'uuid';
+import { v4, parse } from 'uuid';
 import * as cb from './couchbase';
 
 const formKey = v4();
-let submissions = 500_000;
+let submissions = 200_000;
 
 (async () => {
   await cb.connect();
@@ -24,7 +25,13 @@ let submissions = 500_000;
       submission_date: faker.date.past(2).getTime(),
     };
     newSubmissions.push(sub);
-    inserts.push(cb.insertRecord(v4(), formKey, sub));
+
+    let base64url = Buffer.from(parse(formKey) as number[])
+      .toString('base64')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .substr(0, 20);
+    inserts.push(cb.insertRecord(v4(), base64url, sub));
 
     //batch into groups of 1000
     if (!(newSubmissions.length % 1000)) {

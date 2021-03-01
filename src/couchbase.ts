@@ -31,7 +31,7 @@ export const insertRecord = (id: string, formId: string, item: any) => {
   const bucket = cluster.bucket('form');
   const collection = bucket.defaultCollection();
   let sub = {
-    _form: formId,
+    _formbase64: formId,
     data: item,
     created_date: new Date(),
     type: 'submission',
